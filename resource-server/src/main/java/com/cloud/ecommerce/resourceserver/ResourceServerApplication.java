@@ -24,14 +24,14 @@ public class ResourceServerApplication {
 		SpringApplication.run(ResourceServerApplication.class, args);
 	}
 
-	@Autowired
-	ProductRepository productRepository;
-
-	@Autowired
-	CategoryRepository categoryRepository;
-
-	@Autowired
-	BrandRepository brandRepository;
+//	@Autowired
+//	ProductRepository productRepository;
+//
+//	@Autowired
+//	CategoryRepository categoryRepository;
+//
+//	@Autowired
+//	BrandRepository brandRepository;
 
 //	@Bean
 //	public CommandLineRunner seedDatabase(){
@@ -51,87 +51,87 @@ public class ResourceServerApplication {
 //			Product[] products = {
 //
 //					new Product(new Category(2L), new Brand(3L), "A101","World Star",
-//							"Shoes for next century", 195.5,"shoe-1.jpg", true, 12, new Date(2022,8,11),
+//							"Shoes for next century", 195.5,"shoe-1.png", true, 12, new Date(2022,8,11),
 //							new  Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(1L), new Brand(3L), "A102","White Line",
-//							"Will make you world champion", 295.5,"shoe-2.jpg", true, 12, new
+//							"Will make you world champion", 295.5,"shoe-2.png", true, 12, new
 //							Date(2022,8,11), new Date(2022, 8,11)),
 //
 //					new Product(new Category(3L), new Brand(3L), "A103","Prism White",
-//							"You have already won a gold medal", 135.5,"shoe-3.jpg", true, 12, new
+//							"You have already won a gold medal", 135.5,"shoe-3.png", true, 12, new
 //							Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(1L), new Brand(1L), "A104","Olympic Runner",
-//							"Hitect in shoesy", 195.5,"shoe-4.jpg", true, 12, new Date(2022,8,11), new
+//							"Hitect in shoesy", 195.5,"shoe-4.png", true, 12, new Date(2022,8,11), new
 //							Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(2L), new Brand(2L), "A105","Lala Land Shoes",
-//							"Romantism with hitech combined", 185.5,"shoe-5.jpg", true, 12, new
+//							"Romantism with hitech combined", 185.5,"shoe-5.png", true, 12, new
 //							Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(3L), new Brand(3L), "A106","Dunker in the Sky",
-//							"Blue Star  for next century", 195.5,"shoe-6.jpg", true, 12, new
+//							"Blue Star  for next century", 195.5,"shoe-6.png", true, 12, new
 //							Date(2022,8,11), new Date(2022, 8,11)),
 //
 //					new Product(new Category(1L), new Brand(2L),
 //							"A107","Even the smallest can dunk", "Bouncy Shoes for next century",
-//							165.5,"shoe-7.jpg", true, 12, new Date(2022,8,11), new Date(2022, 8,11)),
+//							165.5,"shoe-7.png", true, 12, new Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //
 //
 //
 //					new Product(new Category(2L), new Brand(3L), "A108","Wimbledon Star",
-//							"Grass or sand don't matter", 167.5,"shoe-8.jpg", true, 12, new
+//							"Grass or sand don't matter", 167.5,"shoe-8.png", true, 12, new
 //							Date(2022,8,11), new Date(2022, 8,11)),
 //
 //					new Product(new Category(3L), new Brand(1L),
 //							"A109","Will blow your brains out!", "Do something good for your brains",
-//							175.5,"shoe-9.jpg", true, 12, new Date(2022,8,11), new Date(2022, 8,11)),
+//							175.5,"shoe-9.png", true, 12, new Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(1L), new Brand(3L), "A110","Universal  Star",
-//							"Neptune Plazma", 105.5,"shoe-10.jpg", true, 12, new Date(2022,8,11), new
+//							"Neptune Plazma", 105.5,"shoe-10.png", true, 12, new Date(2022,8,11), new
 //							Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(2L), new Brand(2L), "A111","Saturn",
-//							"Will take you to the Saturn", 115.5,"shoe-11.jpg", true, 12, new
+//							"Will take you to the Saturn", 115.5,"shoe-11.png", true, 12, new
 //							Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(3L), new Brand(1L), "A112","Paris Blues",
-//							"Save the environment", 195.5,"shoe-12.jpg", true, 12, new Date(2022,8,11),
+//							"Save the environment", 195.5,"shoe-12.png", true, 12, new Date(2022,8,11),
 //							new Date(2022, 8,11)), new Product(new Category(2L), new Brand(3L),
-//					"A113","Vegan  Star", "Vegan", 125.5,"shoe-13.jpg", true, 12, new
+//					"A113","Vegan  Star", "Vegan", 125.5,"shoe-13.png", true, 12, new
 //					Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(2L), new Brand(2L), "A114","London Star",
-//							"Piccadily", 145.5,"shoe-14.jpg", true, 12, new Date(2022,8,11), new
+//							"Piccadily", 145.5,"shoe-14.png", true, 12, new Date(2022,8,11), new
 //							Date(2022, 8,11)),
 //
 //					new Product(new Category(1L), new Brand(1L), "A115","Istanbul Star",
-//							"Bhosphoros Blues", 165.5,"shoe-15.jpg", true, 12, new Date(2022,8,11), new
+//							"Bhosphoros Blues", 165.5,"shoe-15.png", true, 12, new Date(2022,8,11), new
 //							Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(3L), new Brand(3L), "A116","One and Only",
-//							"Roland Garros", 155.5,"shoe-16.jpg", true, 12, new Date(2022,8,11), new
+//							"Roland Garros", 155.5,"shoe-16.png", true, 12, new Date(2022,8,11), new
 //							Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(1L), new Brand(2L), "A117","NBA Star", "Warriors",
-//							125.5,"shoe-17.jpg", true, 12, new Date(2022,8,11), new Date(2022, 8,11)),
+//							125.5,"shoe-17.png", true, 12, new Date(2022,8,11), new Date(2022, 8,11)),
 //
 //
 //					new Product(new Category(2L), new Brand(3L), "A118","Atlantic All Star ",
-//							"Wimbledon", 191.5,"shoe-18.jpg", true, 12, new Date(2022,8,11), new
+//							"Wimbledon", 191.5,"shoe-18.png", true, 12, new Date(2022,8,11), new
 //							Date(2022, 8,11)), };
 //
 //			productRepository.saveAll(Arrays.asList(products));

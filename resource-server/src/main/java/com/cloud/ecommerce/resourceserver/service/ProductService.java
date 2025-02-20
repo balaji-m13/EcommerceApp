@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -71,8 +70,6 @@ public class ProductService implements IProductService{
             Pageable paging = PageRequest.of(specParams.getPageIndex() - 1, specParams.getPageSize());
             pages = productRepository.findAll(productSpecification.getProducts(specParams), paging);
             System.out.println("PAGES");
-            System.out.println(pages.getTotalPages());
-            System.out.println(pages.getContent());
             if(pages != null && pages.getContent() != null) {
                 productList = pages.stream().toList();
                 System.out.println("Product List");
@@ -82,14 +79,14 @@ public class ProductService implements IProductService{
                     ProductResponseListDto productResponseListDto = new ProductResponseListDto();
                     productResponseListDto.setTotalCount(pages.getTotalElements());
                     productResponseListDto.setPageIndex(pages.getNumber() + 1);
-                    productResponseListDto.setTotalPages(pages.getTotalPages());
+                    productResponseListDto.setPageSize(specParams.getPageSize());
                     productResponseListDto.setProductList(new ArrayList<>());
                     for(Product product: productList) {
                         ProductResponseDto productResponseDto = new ProductResponseDto();
                         productResponseDto.populateDto(product);
                         productResponseListDto.getProductList().add(productResponseDto);
                     }
-                    System.out.println(productResponseListDto.getTotalPages());
+                    System.out.println(productResponseListDto.getPageSize());
                     return productResponseListDto;
                 }
             }

@@ -45,11 +45,11 @@ public class ProductsController {
     @GetMapping("/brands")
     public ResponseEntity<List<Brand>> getBrands() {
         List<Brand> brands = brandRepository.findAll();
-        System.out.println("BRAND DB RESPONSE");
-        System.out.println(brands.size());
-        for(int i = 0; i < brands.size(); i++) {
-            System.out.println(brands.get(i).getBrandId() + " " + brands.get(i).getBrandName());
-        }
+//        System.out.println("BRAND DB RESPONSE");
+//        System.out.println(brands.size());
+//        for(int i = 0; i < brands.size(); i++) {
+//            System.out.println(brands.get(i).getBrandId() + " " + brands.get(i).getBrandName());
+//        }
         if(brands != null)
             return ResponseEntity.ok(brands);
         return ResponseEntity.noContent().build();

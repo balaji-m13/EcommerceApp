@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class ProductResponseListDto {
-    private int totalPages;
+    private int pageSize;
     private Long totalCount;
     private int pageIndex;
     private List<ProductResponseDto> productList;
@@ -16,12 +16,12 @@ public class ProductResponseListDto {
         this.productList = new ArrayList<>();
     }
 
-    public int getTotalPages() {
-        return totalPages;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public Long getTotalCount() {

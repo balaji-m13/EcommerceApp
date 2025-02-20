@@ -1,5 +1,6 @@
 package com.cloud.ecommerce.resourceserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -49,6 +50,7 @@ public class Category {
     private String categoryName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @JsonIgnore
     private Set<Product> products;
 
     public Category() {

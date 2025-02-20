@@ -1,5 +1,6 @@
 package com.cloud.ecommerce.resourceserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class Brand {
     private String brandName;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "brand")
+    @JsonIgnore
     private Set<Product> products;
 
     public Brand() {
