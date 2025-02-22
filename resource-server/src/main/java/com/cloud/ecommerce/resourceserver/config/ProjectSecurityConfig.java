@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -40,7 +41,8 @@ public class ProjectSecurityConfig {
 
         http.authorizeHttpRequests((authorize) ->
                 authorize
-                        .requestMatchers("/api/shop/categories", "/api/shop/brands","/api/shop/brands/**","/api/shop/products","/api/shop/products/**", "/api/shop/**").permitAll());
+                        .requestMatchers("/api/shop/categories", "/api/shop/brands","/api/shop/brands/**","/api/shop/products","/api/shop/products/**", "/api/shop/**", "/api/basket", "/api/basket/**").permitAll())
+                .csrf(AbstractHttpConfigurer::disable);
         //.requestMatchers("/api/shop/categories").authenticated());
         // .httpBasic(Customizer.withDefaults())
         //.formLogin(Customizer.withDefaults());
