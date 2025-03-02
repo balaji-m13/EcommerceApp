@@ -23,7 +23,7 @@ public class BasketItem {
         this.brandName = brandName;
         this.categoryName = categoryName;
     }
-
+    public BasketItem() {}
     public Long getProductId() {
         return productId;
     }

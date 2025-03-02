@@ -9,6 +9,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -21,7 +22,8 @@ public class ProjectSecurityConfig {
 
     @Bean
     public SecurityFilterChain configureSecurity(HttpSecurity http) throws Exception {
-
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .cors(corsCustomizer -> corsCustomizer.configurationSource(new CorsConfigurationSource() {
                     @Override
@@ -39,10 +41,15 @@ public class ProjectSecurityConfig {
 
 
 
+        http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests((authorize) ->
                 authorize
-                        .requestMatchers("/api/shop/categories", "/api/shop/brands","/api/shop/brands/**","/api/shop/products","/api/shop/products/**", "/api/shop/**", "/api/basket", "/api/basket/**").permitAll())
-                .csrf(AbstractHttpConfigurer::disable);
+                        .requestMatchers("/api/shop/categories", "/api/shop/brands","/api/shop/brands/**","/api/shop/products","/api/shop/products/**", "/api/shop/**", "/api/basket", "/api/basket/**")
+                        .permitAll()
+                        .requestMatchers("/api/orders/**").authenticated())
+                        .oauth2ResourceServer(oauth2->oauth2.jwt(jwtCustomizer->
+                                jwtCustomizer.jwtAuthenticationConverter(jwtAuthenticationConverter)));
+//                .csrf(AbstractHttpConfigurer::disable);
         //.requestMatchers("/api/shop/categories").authenticated());
         // .httpBasic(Customizer.withDefaults())
         //.formLogin(Customizer.withDefaults());
