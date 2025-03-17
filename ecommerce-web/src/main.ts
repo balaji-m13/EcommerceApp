@@ -8,6 +8,9 @@ import { provideHttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, importProvidersFrom} from '@angular/core';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
 import {KeycloakService} from 'keycloak-angular'
+import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './app/auth/auth.interceptor';
 
 function initializeKeycloack(keycloak: KeycloakService) {
   return () => {
@@ -41,9 +44,15 @@ bootstrapApplication(AppComponent, {
       multi: true,
       deps: [KeycloakService]
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     provideAnimations(),
     provideRouter(routes),
-    provideHttpClient()
+    provideHttpClient(),
+    provideToastr()
   ]
 })
   .catch((err) => console.error(err));

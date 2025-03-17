@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, from, switchMap, tap } from "rxjs";
 import { Cart, ICart, ICartTotals } from "../../shared/model/cart";
 import { environment } from "../../../environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { map } from "rxjs";
 import { response } from "express";
 import { IProduct } from "../../shared/model/product";
 import { ICartItem } from "../../shared/model/cart";
 import { ProductItemComponent } from "../../shop/product-item/product-item.component";
+import { IDeliveryMethod } from "../../shared/model/delivery";
+import { KeycloakService } from "keycloak-angular";
 
 
 @Injectable({
@@ -20,8 +22,9 @@ export class CartService {
     private cartTotalsSource = new BehaviorSubject<ICartTotals | null>(null);
     cartTotal$ = this.cartTotalsSource.asObservable();
     basketUrl = environment.apiBasketUrl;
+    baseUrl = environment.apiUrl;
 
-    constructor(private httpClient: HttpClient) {}
+    constructor(private httpClient: HttpClient, private keycloakService: KeycloakService) {}
 
     createCart(): Cart {
         const cart = new Cart();
@@ -143,5 +146,39 @@ export class CartService {
                 localStorage.removeItem('angular_cart_id');
             }
         })
+    }
+
+    setShippingPrice(deliveryMethod: IDeliveryMethod) {
+        const cart = this.getCurrentCart();
+        if(cart) {
+            cart.deliveryMethodId = deliveryMethod.deliveryMethodId;
+            cart.shippingPrice = deliveryMethod.price;
+            this.setCart(cart);
+        }
+    }
+
+    createPaymentIntent() {
+        console.log(this.getCurrentCart()?.id);
+        return from(this.keycloakService.getToken()).pipe(
+            // 2) Once we have the token, attach it to the request
+            switchMap((token: string) => {
+              // Build the Authorization header
+              const headers = new HttpHeaders({
+                Authorization: `Bearer ${token}`
+              });
+        
+              // 3) Make the POST call with headers
+              return this.httpClient.post<ICart>(
+                this.baseUrl + 'payments/' + this.getCurrentCart()?.id,
+                {},
+                { headers }
+              );
+            }),
+            // 4) Tap into the result to update your cartSource, etc.
+            tap(cart => {
+              this.cartSource.next(cart);
+              console.log(cart);
+            })
+          );
     }
 }

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
 
 export const routes: Routes = [
    
@@ -19,7 +20,12 @@ export const routes: Routes = [
       {
         path: 'checkout',
         loadChildren: () => import('./checkout/checkout.routes').then(r => r.CHECKOUT_ROUTES)
-      }
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('./orders/routes').then(r => r.ORDER_ROUTES)
+      },
+      { path: 'checkout/success', component: CheckoutSuccessComponent }
      // { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
    
   ];

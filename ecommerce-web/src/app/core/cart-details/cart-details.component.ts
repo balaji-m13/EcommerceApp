@@ -1,6 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
 import { ICartItem } from '../../shared/model/cart';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgIf } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 
@@ -13,6 +13,7 @@ import { EventEmitter } from '@angular/core';
 export class CartDetailsComponent {
 
   @Input() items: ICartItem[] = [];
+  @Input() isCart: boolean = true;
   @Output('increment') increment: EventEmitter<ICartItem> = new EventEmitter<ICartItem>();
 
   @Output() decrement: EventEmitter<ICartItem>= new EventEmitter<ICartItem>();

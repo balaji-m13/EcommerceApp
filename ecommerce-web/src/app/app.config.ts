@@ -8,6 +8,9 @@ import { importProvidersFrom} from '@angular/core';
 import { PaginationModule } from 'ngx-bootstrap/pagination'
 import {KeycloakService} from 'keycloak-angular'
 import { APP_INITIALIZER} from '@angular/core';
+import { provideToastr, ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 function initializeKeycloack(keycloak: KeycloakService) {
@@ -34,11 +37,16 @@ function initializeKeycloack(keycloak: KeycloakService) {
 }
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()), provideHttpClient(),importProvidersFrom(PaginationModule.forRoot()), 
+  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay()), provideHttpClient(),importProvidersFrom(PaginationModule.forRoot()), provideToastr(), 
     KeycloakService, {
     provide: APP_INITIALIZER,
     useFactory: initializeKeycloack,
     multi: true,
     deps: [KeycloakService]
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
   }]
 };

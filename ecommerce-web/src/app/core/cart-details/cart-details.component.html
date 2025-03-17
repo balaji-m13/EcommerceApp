@@ -44,18 +44,18 @@
                     <td class="align-middle">
                         <div class="d-flex align-items-center" 
                              >
-                            <i (click)="decrementItemQuantity(item)"  class="fa fa-minus-circle text-warning mr-2"
+                            <i *ngIf="isCart" (click)="decrementItemQuantity(item)"  class="fa fa-minus-circle text-warning mr-2"
                                 style="cursor: pointer; font-size: 2em;"  ></i>
                             <span class="font-weight-bold" style="font-size: 1.5em;">
                               {{item.quantity}}
                             </span>
-                            <i (click)="incrementItemQuantity(item)" class="fa fa-plus-circle text-warning mx-2"
+                            <i *ngIf="isCart"  (click)="incrementItemQuantity(item)" class="fa fa-plus-circle text-warning mx-2"
                                 style="cursor: pointer; font-size: 2em;" ></i>
                         </div>
                     </td>
                     <td class="align-middle">
                         <strong>{{(item.unitPrice * item.quantity)| currency}}</strong></td>
-                    <td class="align-middle text-center" >
+                    <td class="align-middle text-center" *ngIf="isCart">
                         <a class="text-danger">
                             <i  (click)="removeCartItem(item)"  class="fa fa-trash" style="font-size: 2em; cursor: pointer;"></i>
                         </a>

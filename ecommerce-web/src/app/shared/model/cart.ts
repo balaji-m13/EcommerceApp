@@ -4,6 +4,9 @@ export interface ICart {
     id: string;
     items: ICartItem[];
     shippingPrice: number;
+    deliveryMethodId: number;
+    clientSecret?: string;
+    paymentIntentId?: string;
 }
 
 
@@ -21,6 +24,7 @@ export class Cart implements ICart {
     id = createId();
     items: ICartItem[] = [];
     shippingPrice: number = 0;
+    deliveryMethodId = 0;
 }
 
 export interface ICartTotals {
