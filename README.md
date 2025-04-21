@@ -23,3 +23,5 @@ Caching: Redis
 Authentication: OAuth2 with Keycloak
 
 Payments: Stripe API
+
+
